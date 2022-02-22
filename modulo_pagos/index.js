@@ -34,8 +34,8 @@ app.post('/user', (req, res) => {
     u1.lastname = req.body.lastname;
     u1.description = req.body.description;
     u1.account = req.body.account;
-
     var jsonU1 = JSON.stringify(u1);
+    console.log(jsonU1);
     users.push(JSON.parse(jsonU1));
     //console.log(users[users.length - 2]);
     fs.writeFile("abs.json",  JSON.stringify(users), function(err) {
@@ -55,27 +55,37 @@ app.post('/user', (req, res) => {
 /*PAGOS*/
 
 app.post('/pago', (req, res) => {
-  newPay(req.body)
-  .then((resBank) => {
-      pagos.push(resBank);
-      //Guardar un nuevo pago
-      fs.writeFile("pagos.json",  JSON.stringify(pagos), function(err) {
-        if (err) {
-          console.log(err);
-          res.status(400).send({
-            error: "Error al generar el pago"
-          });
-        }
-      });
-      res.status(201).send({
-        response: resBank
-      });
-  })
-  .catch((error) => {
-    res.status(500).send({
-      body: "Error inesperado al crear el pago"
+  if(!req.body.account) {
+    res.status(400).send({
+      body: "El numero de cuenta es obligatorio"
     });
-  });
+  } else if (!req.body.amount) {
+    res.status(400).send({
+      body: "El monto del pago es obligatorio"
+    });
+  } else {
+    newPay(req.body)
+    .then((resBank) => {
+        pagos.push(resBank);
+        //Guardar un nuevo pago
+        fs.writeFile("pagos.json",  JSON.stringify(pagos), function(err) {
+          if (err) {
+            console.log(err);
+            res.status(400).send({
+              error: "Error al generar el pago"
+            });
+          }
+        });
+        res.status(201).send({
+          response: resBank
+        });
+    })
+    .catch((error) => {
+      res.status(500).send({
+        body: "Error inesperado al crear el pago"
+      });
+    });
+  }
 });
 
 async function newPay(body){
