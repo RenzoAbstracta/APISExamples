@@ -1,0 +1,25 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/pago",
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$.account"
+            },
+            {
+                "matchesJsonPath": "$.amount"
+            }
+        ]
+    },
+    "response": {
+        "status": 201,
+        "jsonBody": {
+            "payId": "{{randomInt lower=1000 upper=999999}}",
+            "amount": "{{jsonPath request.body '$.account'}}",
+            "account": "{{jsonPath request.body '$.amount'}}"
+        },
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

@@ -72,35 +72,15 @@ app.post('/pago', (req, res) => {
       });
   })
   .catch((error) => {
-    res.status(201).send({
+    res.status(500).send({
       body: "Error inesperado al crear el pago"
     });
   });
 });
 
-
-app.get('/pagos', (req, res) => {
-  const {amount} = req.query;
-  if(!isNaN(amount)) {
-    if(amount) {
-      const result = pagos.filter(p => p.amount >= amount);
-      if(!result || result.length == 0)
-        res.status(204).send(result)
-      else
-        res.send(result);
-    } else {
-      res.send(pagos);
-    }
-  } else {
-    res.status(400).send({error:"El monto debe ser un numero"})
-  }
-
-});
-
 async function newPay(body){
-  console.log(body)
   const { data } = await axios({
-    baseURL: 'http://localhost:3002/',
+    baseURL: 'http://localhost:8081/',
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -109,8 +89,28 @@ async function newPay(body){
     data: body,
     responseType: 'json',
   });
+  console.log(data);
   return data;
 }
+
+
+app.get('/pagos', (req, res) => {
+  const {amount} = req.query;
+  if(amount) {
+    if(!isNaN(amount)) {
+      const result = pagos.filter(p => p.amount >= amount);
+      if(!result || result.length == 0)
+        res.status(204).send(result)
+      else
+        res.send(result);
+    } else {
+      res.status(400).send({error:"El monto debe ser un numero"})
+    }
+  } else {
+    res.send(pagos);
+  }
+
+});
 
 app.listen(port, () => {
   console.log('Escuchando en ' + port);
