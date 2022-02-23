@@ -15,7 +15,7 @@ app.get('/users', (req, res) => {
 app.get('/user/:userId', (req, res) => {
   const { userId } = req.params;
   var user = users.filter(u => u.id == userId);
-  res.send(user);
+  res.send(user[0]);
 });
 
 app.post('/user', (req, res) => {
