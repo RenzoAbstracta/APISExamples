@@ -38,7 +38,8 @@ app.post('/user', (req, res) => {
     console.log(jsonU1);
     users.push(JSON.parse(jsonU1));
     //console.log(users[users.length - 2]);
-    fs.writeFile("abs.json",  JSON.stringify(users), function(err) {
+    var user = users.filter(u => u != null);
+    fs.writeFile("abs.json",  JSON.stringify(user), function(err) {
       if (err) {
         console.log(err);
         res.status(400).send({
