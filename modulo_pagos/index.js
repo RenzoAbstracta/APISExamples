@@ -48,7 +48,7 @@ app.post('/user', (req, res) => {
       }
     });
 
-    res.send(JSON.parse(jsonU1));
+    res.status(201).send(JSON.parse(jsonU1));
   }
 
 });
