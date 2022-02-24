@@ -15,8 +15,8 @@
         "status": 201,
         "jsonBody": {
             "payId": "{{randomInt lower=1000 upper=999999}}",
-            "amount": "{{jsonPath request.body '$.account'}}",
-            "account": "{{jsonPath request.body '$.amount'}}"
+            "amount": "{{jsonPath request.body '$.amount'}}",
+            "account": "{{jsonPath request.body '$.account'}}"
         },
         "headers": {
             "Content-Type": "application/json"
