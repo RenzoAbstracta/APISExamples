@@ -91,7 +91,7 @@ app.post('/pago', (req, res) => {
 
 async function newPay(body){
   const { data } = await axios({
-    baseURL: 'http://localhost:8081/',
+    baseURL: 'http://localhost:3002/',
     method: 'POST',
     headers: {
       'content-type': 'application/json',
