@@ -2,7 +2,7 @@
 
 Javascript application endpoints using [**express**](https://webdriver.io/).
 
-The bank*module folder contains the implementation of the *POST* method for the *payment* endpoint. This endpoint is used on the payment*module, in order to generate a dependance between the _POST_ method for the _payment_ endpoint on the PAYMENT app and the _POST_ method for the _payment_ endpoint on the BANK app.
+The bank_module folder contains the implementation of the _POST_ method for the _payment_ endpoint. This endpoint is used on the payment_module, in order to generate a dependance between the _POST_ method for the _payment_ endpoint on the PAYMENT app and the _POST_ method for the _payment_ endpoint on the BANK app.
 
 ## Installing Dependencies
 
