@@ -1,3 +1,9 @@
+# ENVS
+payment_module/.env-*
+
+# Modules
+bank_module/node_modules
+payment_module/node_modules
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,windows

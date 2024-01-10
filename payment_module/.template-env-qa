@@ -1,0 +1,2 @@
+BANK_URL='http://localhost:local-port-running-bank-app/'
+docker-port-running-wiremock

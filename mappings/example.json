@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/abstracta"
+  },
+  "response": {
+    "status": 200,
+    "body": "Hello Abstracta",
+    "headers": {
+      "Content-Type": "text/plain"
+    }
+  }
+}
