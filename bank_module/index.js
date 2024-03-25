@@ -17,6 +17,13 @@ app.post('/payment', (req, res) => {
   res.send(JSON.parse(strPayment));
 });
 
+
+app.get('/account/:accountId', (req, res) => {
+  const { accountId } = req.params;
+  console.log(accountId);
+  res.send({'total_ammount': 40000});
+});
+
 app.listen(port, () => {
   console.log('App listening on Port ' + port);
 });

@@ -120,6 +120,41 @@ app.get('/payments', (req, res) => {
   }
 });
 
+/*NEW*/
+app.get('/account/:accountId', (req, res) => {
+  const { accountId } = req.params;
+  if(!accountId) {
+    res.status(405).send({ error: 'This method is not allowed' });
+  } else {
+    getAccountAmmount(accountId)
+    .then((resBank) => {
+      res.status(200).send({
+        response: resBank,
+      });
+    })
+    .catch((error) => {
+      res.status(500).send({
+        body: `Unexpected error trying to create the payment ${error}`,
+      });
+    });
+  }
+});
+
+
+async function getAccountAmmount(accountId) {
+  const { data } = await axios({
+    baseURL: BANK_URL,
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+    },
+    url: `account/${accountId}`,
+    responseType: 'json',
+  });
+  console.log(data);
+  return data;
+}
+
 app.listen(port, () => {
   console.log('App listening on Port ' + port);
 });
